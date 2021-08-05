@@ -10,71 +10,37 @@ function App() {
   const [startTime , setStart] = React.useState("");
   const [endTime , setEnd ]= React.useState("");
   const [responseData , setResponse ] =React.useState([]);
-  const handleClick = async(e)=>{
+  const [available , setAvailable] = React.useState(0);
+  const handleClick = (e)=>{
     e.preventDefault();
     console.log("start ", startTime);
     console.log("end ", endTime);
-
-  
-
-  var config = {
-    method: 'get',
-    url: `http://api.vibconnect.io/v1/Accounts/7SZX17XNMDO3MEB325Z7/Calls?StartTime=${startTime}&EndTime=${endTime}`,
-    headers: { 
-      'access-control-allow-origin':"*",
-      "Content-Type":"application/json",
-      'Authorization': 'Basic N1NaWDE3WE5NRE8zTUVCMzI1Wjc6UVNPT1RmQmRrSW91QTZHenlaVlVQU1NOdWpSeVZMaGYyenptOEFyZA=='
-    }
-  };
-
-  axios(config)
-  .then(function (response) {
-    console.log(JSON.stringify(response.data));
-    setResponse(response.data)
-    // <CsvDownload data={JSON.stringify(response.data)} />
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
-  
-  
+    const data = {StartTime : startTime , EndTime : endTime}
+     axios.post('https://vibtree2.herokuapp.com/cdr', data)
+     .then(response =>{ 
+       setResponse(response.data.calls);
+       setAvailable(1)
+      //  alert("Data is Fetched now Click on Download to download it")
+      })
+     
+     .catch(err=> {console.log("err ",err)})
   }
-  const mockData = [
-    {
-      color: "red",
-      value: "#f00"
-    },
-    {
-      color: "green",
-      value: "#0f0"
-    },
-    {
-      color: "blue",
-      value: "#00f"
-    },
-    {
-      color: "cyan",
-      value: "#0ff"
-    },
-    {
-      color: "magenta",
-      value: "#f0f"
-    },
-    {
-      color: "yellow",
-      value: "#ff0"
-    },
-    {
-      color: "black",
-      value: "#000"
-    }
-  ]
+
+ const returnNull =()=>{
+   return null
+ }
+
+
+ 
+
   return (
     <div className="App">
-      <Input value={startTime} onChange={e=> setStart(e.target.value)} placeholder="Start Time "/>
-      <Input value={endTime} onChange={e=> setEnd(e.target.value)} placeholder="Endtime"/>
-      <Button variant="contained" onClick={handleClick} >Download</Button>
-      <CsvDownload data={responseData} />
+      <h3>Date you Entered should be in "yyyy-mm-dd" format</h3>
+      <Input value={startTime} onChange={e=> setStart(e.target.value)} placeholder="Start Date" />
+      <Input value={endTime} onChange={e=> setEnd(e.target.value)} placeholder="End Date"/>
+      {/* <Button variant="contained" onClick={handleClick} >Fetch Data</Button> */}
+      {available ===1 ? <CsvDownload data={responseData}  /> : <Button variant="contained" onClick={handleClick} >Fetch Data</Button>}
+      {/* <CsvDownload data={responseData}  /> */}
       <BasicTable/>
     </div>
   );
