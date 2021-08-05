@@ -134,7 +134,7 @@ React.useEffect(() => {
       //  return arr1
    })
    console.log("aar1 ", arr1)
-})
+},[filteredArr])
 
   const classes = useStyles();
 
