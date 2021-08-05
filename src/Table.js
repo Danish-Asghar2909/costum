@@ -38,11 +38,11 @@ function arraySearch(arr,val) {
         socket.on('danish', name=>{
             // newRow.push(name)
             // setRow(name)
-            console.log("name",name)
+            // console.log("name",name)
             const arr = arraySearch(arr1 , name.CallSid )
-            console.log("arr ", arr);
+            // console.log("arr ", arr);
             if(arr!=false){
-              console.log("arr 2 ", arr1[arr])
+              // console.log("arr 2 ", arr1[arr])
               arr1[arr]=name
 
             }else{
@@ -53,7 +53,7 @@ function arraySearch(arr,val) {
             setRow(arr1)
             return arr1
         })
-        console.log("aar1 ", arr1)
+        // console.log("aar1 ", arr1)
         // setRow(arr1)
 }
 
@@ -82,8 +82,8 @@ function createData(name, calories, fat, carbs, protein) {
 
 
 
-console.log("filtered array ", filteredArr);
-console.log("ner array ", newRow)
+// console.log("filtered array ", filteredArr);
+// console.log("ner array ", newRow)
 
 
 const modifyFilter = (sid , status)=>{
@@ -120,11 +120,11 @@ React.useEffect(() => {
    socket.on('danish', name=>{
        // newRow.push(name)
        // setRow(name)
-       console.log("name",name)
+      //  console.log("name",name)
        const arr = arraySearch(arr1 , name.CallSid )
-       console.log("arr ", arr);
+      //  console.log("arr ", arr);
        if(arr!=false){
-         console.log("arr 2 ", arr1[arr])
+        //  console.log("arr 2 ", arr1[arr])
          arr1[arr]=name
        }else{
          arr1.push(name)    
@@ -133,7 +133,7 @@ React.useEffect(() => {
        setRow(arr1)
       //  return arr1
    })
-   console.log("aar1 ", arr1)
+  //  console.log("aar1 ", arr1)
 },[filteredArr])
 
   const classes = useStyles();

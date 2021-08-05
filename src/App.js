@@ -21,6 +21,8 @@ function App() {
     method: 'get',
     url: `http://api.vibconnect.io/v1/Accounts/7SZX17XNMDO3MEB325Z7/Calls?StartTime=${startTime}&EndTime=${endTime}`,
     headers: { 
+      'access-control-allow-origin':"*",
+      "Content-Type":"application/json",
       'Authorization': 'Basic N1NaWDE3WE5NRE8zTUVCMzI1Wjc6UVNPT1RmQmRrSW91QTZHenlaVlVQU1NOdWpSeVZMaGYyenptOEFyZA=='
     }
   };
